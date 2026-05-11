@@ -3,158 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>멍냥마켓</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>멍냥마켓 | 동물 & 코드</title>
     <style>
+        :root {
+            --primary-color: #ff6b6b;
+            --bg-yellow: #fdf2b5;
+            --text-dark: #333;
+            --gray-light: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
         body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f9fafb;
+            background-color: #ffffff;
+            color: var(--text-dark);
+            line-height: 1.6;
         }
-        .hero-bg {
-            background-color: #fbeea4; /* 이미지와 유사한 부드러운 노란색 */
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .primary-bg {
-            background-color: #f472b6; /* 핑크색 포인트 */
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #222;
         }
-        .primary-text {
-            color: #f472b6;
+
+        .logo span {
+            color: var(--primary-color);
         }
-        .filter-btn.active {
-            background-color: #f472b6;
+
+        .cart-btn {
+            background: var(--primary-color);
             color: white;
-            border-color: #f472b6;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--bg-yellow);
+            margin: 20px 5%;
+            border-radius: 24px;
+            padding: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+            object-fit: cover;
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
         .filter-btn {
-            background-color: transparent;
-            color: #4b5563;
-            border: 1px solid #e5e7eb;
+            padding: 12px 28px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Product Grid */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 0 5%;
+            margin-bottom: 80px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            background: #eee;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: var(--gray-light);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .code-snippet {
+            font-family: monospace;
+            background: #222;
+            color: #0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 30px; }
+            .hero-content h1 { font-size: 2rem; }
+            .products { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
 
-    <!-- Header -->
-    <header class="bg-white py-4 px-6 md:px-12 flex justify-between items-center shadow-sm z-10 relative">
-        <div class="flex items-center gap-2 cursor-pointer">
-            <!-- 🐾 로고 아이콘 대체 -->
-            <span class="text-2xl">🐾</span>
-            <h1 class="text-xl font-bold text-gray-800">멍냥마켓</h1>
+    <header>
+        <div class="logo">
+            🐾 멍냥마켓 <span>&lt;/&gt;</span>
         </div>
-        <button class="primary-bg text-white px-5 py-2 rounded-full font-medium flex items-center gap-2 hover:bg-pink-500 transition-colors shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42a28,28,0,1,0,42.95-12.91l6.17-55.51A8,8,0,0,0,204,112H73.34l-3-16h136.5a16,16,0,0,0,15.71-12.86l11.43-62.86A8,8,0,0,0,222.14,58.87ZM84,208a12,12,0,1,1,12-12A12,12,0,0,1,84,208Zm92,0a12,12,0,1,1,12-12A12,12,0,0,1,176,208Zm29.41-112H67.5l-5.82-32H210.6Z"></path>
-            </svg>
-            장바구니 <span class="bg-white primary-text text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full ml-1">2</span>
+        <button class="cart-btn">
+            장바구니 <span>2</span>
         </button>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-bg py-16 px-6 md:px-12 flex flex-col md:flex-row items-center justify-center gap-10 md:gap-24 w-full max-w-[1920px] mx-auto">
-        <div class="flex flex-col gap-4 max-w-lg">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
-                우리 아이를 위한<br>
-                최고의 선택
-            </h2>
-            <p class="text-gray-600 text-lg mt-2 font-medium">
-                엄선된 프리미엄 사료와 장난감을 만나보세요.
-            </p>
-        </div>
-        <div class="w-full max-w-2xl rounded-3xl overflow-hidden shadow-lg">
-            <!-- 고양이와 강아지 이미지 (Unsplash 플레이스홀더 사용) -->
-            <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&q=80&w=1200&h=700" alt="강아지와 고양이" class="w-full h-[300px] md:h-[400px] object-cover" />
-        </div>
-    </section>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>우리 아이를 위한<br>최고의 선택 <span>.js</span></h1>
+                <p>엄선된 프리미엄 사료와 장난감의<br>소스 코드를 분석하여 추천합니다.</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=800" alt="강아지와 고양이 친구들">
+            </div>
+        </section>
 
-    <!-- Main Content -->
-    <main class="flex-1 w-full max-w-7xl mx-auto px-6 md:px-12 py-12">
-        
-        <!-- Filters -->
-        <div class="flex justify-center gap-3 mb-12 flex-wrap">
-            <button class="filter-btn active px-6 py-2 rounded-full font-medium transition-colors" data-filter="all">전체보기</button>
-            <button class="filter-btn px-6 py-2 rounded-full font-medium transition-colors bg-white" data-filter="강아지">🐶 강아지</button>
-            <button class="filter-btn px-6 py-2 rounded-full font-medium transition-colors bg-white" data-filter="고양이">🐱 고양이</button>
+        <div class="filters">
+            <button class="filter-btn active">전체보기</button>
+            <button class="filter-btn">🐶 강아지.cpp</button>
+            <button class="filter-btn">🐱 고양이.py</button>
         </div>
 
-        <!-- Product Grid -->
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- 상품 카드들은 JavaScript로 렌더링 됩니다. -->
-        </div>
+        <section class="products">
+            <!-- Product 1 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&q=80&w=400" alt="강아지 사료" class="card-img">
+                <div class="card-body">
+                    <div class="card-title">유기농 강아지 사료 2kg</div>
+                    <span class="card-tag">카테고리: 강아지</span>
+                    <span class="code-snippet">status: healthy_growth</span>
+                </div>
+            </div>
 
+            <!-- Product 2 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&q=80&w=400" alt="캣타워" class="card-img">
+                <div class="card-body">
+                    <div class="card-title">캣타워 (대형)</div>
+                    <span class="card-tag">카테고리: 고양이</span>
+                    <span class="code-snippet">position: absolute; top: 0;</span>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?auto=format&fit=crop&q=80&w=400" alt="장난감" class="card-img">
+                <div class="card-body">
+                    <div class="card-title">강아지 삑삑이 장난감</div>
+                    <span class="card-tag">카테고리: 강아지</span>
+                    <span class="code-snippet">while(playing) { squeak(); }</span>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=400" alt="고양이 츄르" class="card-img">
+                <div class="card-body">
+                    <div class="card-title">고양이 츄르 (20개입)</div>
+                    <span class="card-tag">카테고리: 고양이</span>
+                    <span class="code-snippet">import snack from 'store';</span>
+                </div>
+            </div>
+
+            <!-- Product 5 (추가됨) -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&q=80&w=400" alt="강아지 방석" class="card-img">
+                <div class="card-body">
+                    <div class="card-title">메모리폼 강아지 방석</div>
+                    <span class="card-tag">카테고리: 강아지</span>
+                    <span class="code-snippet">z-index: -1; padding: 20px;</span>
+                </div>
+            </div>
+
+            <!-- Product 6 (추가됨) -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1597843798133-e1529120535c?auto=format&fit=crop&q=80&w=400" alt="고양이 자동 급식기" class="card-img">
+                <div class="card-body">
+                    <div class="card-title">스마트 자동 급식기</div>
+                    <span class="card-tag">카테고리: 고양이</span>
+                    <span class="code-snippet">setInterval(feed, 3600);</span>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <script>
-        // 상품 데이터
-        const products = [
-            {
-                id: 1,
-                title: "유기농 강아지 사료 2kg",
-                category: "강아지",
-                image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&q=80&w=600&h=450"
-            },
-            {
-                id: 2,
-                title: "캣타워 (대형)",
-                category: "고양이",
-                image: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&q=80&w=600&h=450"
-            },
-            {
-                id: 3,
-                title: "강아지 삑삑이 장난감",
-                category: "강아지",
-                image: "https://images.unsplash.com/photo-1535909339361-ef56e179d637?auto=format&fit=crop&q=80&w=600&h=450"
-            },
-            {
-                id: 4,
-                title: "고양이 츄르 (20개입)",
-                category: "고양이",
-                image: "https://images.unsplash.com/photo-1623387641168-d9803ddd3f35?auto=format&fit=crop&q=80&w=600&h=450"
-            }
-        ];
+    <footer style="text-align: center; padding: 40px; color: #aaa; font-size: 0.9rem;">
+        &copy; 2024 멍냥마켓 Code Edition. All rights reserved.
+    </footer>
 
-        const productGrid = document.getElementById('product-grid');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-
-        // 상품 렌더링 함수
-        function renderProducts(filterCategory = 'all') {
-            productGrid.innerHTML = '';
-            
-            const filteredProducts = filterCategory === 'all' 
-                ? products 
-                : products.filter(p => p.category === filterCategory);
-
-            filteredProducts.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-100 cursor-pointer group';
-                
-                card.innerHTML = `
-                    <div class="h-48 overflow-hidden bg-gray-100">
-                        <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="p-5">
-                        <h3 class="font-bold text-gray-800 text-lg mb-1 truncate">${product.title}</h3>
-                        <p class="text-sm text-gray-400">카테고리: ${product.category}</p>
-                    </div>
-                `;
-                productGrid.appendChild(card);
-            });
-        }
-
-        // 초기 렌더링
-        renderProducts();
-
-        // 필터 버튼 클릭 이벤트
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // 활성화 스타일 변경
-                filterBtns.forEach(b => b.classList.remove('active', 'border-transparent'));
-                e.target.classList.add('active');
-
-                // 데이터 필터링
-                const filter = e.target.getAttribute('data-filter');
-                renderProducts(filter);
-            });
-        });
-    </script>
 </body>
 </html>
