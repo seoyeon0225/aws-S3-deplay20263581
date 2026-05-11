@@ -13,5 +13,6 @@
 - Vanilla JavaScript (DOM 제어 및 필터링 기능)
 
 ## 🚀 화면 미리보기
+<img width="1920" height="1080" alt="화면 캡처 2026-05-11 234027" src="https://github.com/user-attachments/assets/57b897b3-c086-4425-9689-b187c8df75e8" />
 
 
